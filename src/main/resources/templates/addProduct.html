@@ -30,21 +30,21 @@
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'"/>
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" id="description" name="Description"
+                        <input th:field="*{description}" type="text" class="form-control" id="description" name="Description"
                                placeholder="description"
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'">
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Price"
+                        <input th:field="*{price}" type="number" class="form-control" id="price" name="price" placeholder="Price"
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'">
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" id="category" name="category"
+                        <input th:field="*{category}" type="text" class="form-control" id="category" name="category"
                                placeholder="Category" onfocus="this.placeholder = ''"
                                onblur="this.placeholder = 'Category'">
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="number" class="form-control" id="units" name="units"
+                        <input th:field="*{unitsInStock}" type="number" class="form-control" id="units" name="units"
                                placeholder="Units in stock" onfocus="this.placeholder = ''"
                                onblur="this.placeholder = 'Units in stock'">
                     </div>
