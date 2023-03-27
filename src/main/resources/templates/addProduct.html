@@ -24,18 +24,22 @@
         <div class="col-lg-6">
             <div class="login_form_inner register_form_inner">
                 <h3>Add Product</h3>
-                <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post" id="register_form">
+                <form th:object="${productDto}" class="row login_form" action="/addProduct" method="post"
+                      id="register_form" enctype="multipart/form-data" >
                     <div class="col-md-12 form-group">
-                        <input th:field="*{name}" type="text" class="form-control" id="name" name="name" placeholder="Name"
+                        <input th:field="*{name}" type="text" class="form-control" id="name" name="name"
+                               placeholder="Name"
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'"/>
                     </div>
                     <div class="col-md-12 form-group">
-                        <input th:field="*{description}" type="text" class="form-control" id="description" name="Description"
+                        <input th:field="*{description}" type="text" class="form-control" id="description"
+                               name="Description"
                                placeholder="description"
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'">
                     </div>
                     <div class="col-md-12 form-group">
-                        <input th:field="*{price}" type="number" class="form-control" id="price" name="price" placeholder="Price"
+                        <input th:field="*{price}" type="number" class="form-control" id="price" name="price"
+                               placeholder="Price"
                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Price'">
                     </div>
                     <div class="col-md-12 form-group">
@@ -50,6 +54,9 @@
                     </div>
                     <div class="col-md-12 form-group">
                         <button type="submit" value="submit" class="button button-register w-100">Add Product</button>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input type="file" class="form-control" id="productImage" name="productImage">
                     </div>
                 </form>
             </div>
