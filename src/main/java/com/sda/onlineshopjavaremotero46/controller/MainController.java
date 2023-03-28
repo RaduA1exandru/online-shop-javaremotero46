@@ -1,10 +1,14 @@
 package com.sda.onlineshopjavaremotero46.controller;
 
 import com.sda.onlineshopjavaremotero46.dto.ProductDto;
+import com.sda.onlineshopjavaremotero46.dto.UserAccountDto;
+import com.sda.onlineshopjavaremotero46.service.UserAccountService;
+import com.sda.onlineshopjavaremotero46.validator.UserAccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.sda.onlineshopjavaremotero46.service.ProductService;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +22,11 @@ import java.util.Optional;
 public class MainController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserAccountService userAccountService;
+    @Autowired
+    private UserAccountValidator userAccountValidator;
 
     @GetMapping("/addProduct")
     public String addProductGet(Model model) {
@@ -55,12 +64,26 @@ public class MainController {
         model.addAttribute("productDto", optionalProductDto.get());
         return "viewProduct";
     }
+
     @GetMapping("/register")
-    public String registerGet(){
+    public String registerGet(Model model) {
+        UserAccountDto userAccountDto = new UserAccountDto();
+        model.addAttribute("userAccountDto", userAccountDto);
         return "register";
     }
+    @PostMapping("/register")
+    public String registerPost(@ModelAttribute UserAccountDto userAccountDto, BindingResult bindingResult){
+        System.out.println(userAccountDto);
+        userAccountValidator.validate(userAccountDto, bindingResult);
+        if (bindingResult.hasErrors()){
+            return "register";
+        }
+        userAccountService.registerUser(userAccountDto);
+        return "redirect:/login";
+    }
+
     @GetMapping("/login")
-    public String loginGet(){
+    public String loginGet() {
         return "login";
     }
 }
