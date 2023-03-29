@@ -1,10 +1,12 @@
 package com.sda.onlineshopjavaremotero46.controller;
 
 import com.sda.onlineshopjavaremotero46.dto.ProductDto;
+import com.sda.onlineshopjavaremotero46.dto.ProductQuantityDto;
 import com.sda.onlineshopjavaremotero46.dto.UserAccountDto;
 import com.sda.onlineshopjavaremotero46.service.UserAccountService;
 import com.sda.onlineshopjavaremotero46.validator.UserAccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -53,7 +55,6 @@ public class MainController {
         System.out.println(productDtoList);
         return "home";
     }
-
     @GetMapping("/product/{productId}")
     public String viewProductGet(Model model, @PathVariable(value = "productId") String productId) {
         System.out.println("am dat click pe produsul cu id-ul: " + productId);
@@ -62,9 +63,18 @@ public class MainController {
             return "error";
         }
         model.addAttribute("productDto", optionalProductDto.get());
+        ProductQuantityDto productQuantityDto = new ProductQuantityDto();
+        model.addAttribute("productQuantityDto", productQuantityDto);
         return "viewProduct";
     }
-
+    @PostMapping("/product/{productId}")
+    public String addToCartPost(@ModelAttribute ProductQuantityDto productQuantityDto,
+                                @PathVariable(value = "productId") String productId, Authentication authentication){
+        System.out.println(productQuantityDto);
+        System.out.println("adaug in cos produsul cu id-ul: " + productId);
+        System.out.println(authentication.getName());
+        return "redirect:/product/" + productId;
+    }
     @GetMapping("/register")
     public String registerGet(Model model) {
         UserAccountDto userAccountDto = new UserAccountDto();

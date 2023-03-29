@@ -47,6 +47,12 @@
               <input th:field="*{address}" type="text" class="form-control" id="address" name="address" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'">
             </div>
             <div class="col-md-12 form-group">
+              <select th:field="*{userRole}" class="form-control">
+              <option th:value="ROLE_BUYER" th:text="Buyer"></option>
+              <option th:value="ROLE_SELLER" th:text="Seller"></option>
+              </select>
+            </div>
+            <div class="col-md-12 form-group">
               <button type="submit" value="submit" class="button button-register w-100">Register</button>
             </div>
           </form>
