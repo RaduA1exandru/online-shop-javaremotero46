@@ -20,7 +20,9 @@ public class UserAccount {
     private String emailAddress;
     private String password;
     private String address;
-
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Cart cart;
 }
