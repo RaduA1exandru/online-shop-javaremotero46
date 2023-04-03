@@ -3,6 +3,8 @@ package com.sda.onlineshopjavaremotero46.controller;
 import com.sda.onlineshopjavaremotero46.dto.ProductDto;
 import com.sda.onlineshopjavaremotero46.dto.ProductQuantityDto;
 import com.sda.onlineshopjavaremotero46.dto.UserAccountDto;
+import com.sda.onlineshopjavaremotero46.entities.Cart;
+import com.sda.onlineshopjavaremotero46.service.CartService;
 import com.sda.onlineshopjavaremotero46.service.UserAccountService;
 import com.sda.onlineshopjavaremotero46.validator.UserAccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class MainController {
     private UserAccountService userAccountService;
     @Autowired
     private UserAccountValidator userAccountValidator;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/addProduct")
     public String addProductGet(Model model) {
@@ -73,6 +77,7 @@ public class MainController {
         System.out.println(productQuantityDto);
         System.out.println("adaug in cos produsul cu id-ul: " + productId);
         System.out.println(authentication.getName());
+        cartService.addToCart(productId, productQuantityDto, authentication.getName());
         return "redirect:/product/" + productId;
     }
     @GetMapping("/register")
@@ -95,5 +100,9 @@ public class MainController {
     @GetMapping("/login")
     public String loginGet() {
         return "login";
+    }
+    @GetMapping("/checkout")
+    public String checkoutGet(){
+        return "checkout";
     }
 }
