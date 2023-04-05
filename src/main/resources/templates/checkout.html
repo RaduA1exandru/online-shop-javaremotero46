@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div th:insert="fragments/menu :: menu"></div>
 <!--================Cart Area =================-->
 <section class="cart_area">
   <div class="container">
@@ -114,7 +115,9 @@
             <td>
               <div class="checkout_btn_inner d-flex align-items-center">
                 <a class="gray_btn" href="/home">Continue Shopping</a>
-                <a class="primary-btn ml-2" href="#">Place order</a>
+                <form  action="/confirmation" method="post">
+                  <button type="submit" value="submit" class="primary-btn ml-2" >Place order </button>
+                </form>
               </div>
             </td>
           </tr>

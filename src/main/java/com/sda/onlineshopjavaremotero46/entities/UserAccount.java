@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -25,4 +27,6 @@ public class UserAccount {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Cart cart;
+    @OneToMany(mappedBy = "userAccount")
+    private List<Order> orderList;
 }
